@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To黄婷</title>
+    <style>
+        :root {
+            --popup-min-width: clamp(60px, 15vw, 120px);
+            --popup-padding: clamp(9px, 2vw, 14px);
+            --popup-font-size: clamp(14px, 3vw, 18px);
+        }
+        body { 
+    margin: 0; 
+    padding: 0; 
+    background: #fff; 
+    height: 100vh; 
+    position: relative; 
+    overflow: hidden; 
+    background-image: url('https://space.coze.cn/s/7cbjRyRpUeU/?width_height=810x1800');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    border: 10px solid rgba(255, 255, 255, 0.3);
+    box-sizing: border-box; background-color: var(--rainbow-color);
+}
+        #init-text { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-family: "微软雅黑", sans-serif; 
+            font-size: clamp(28px, 8vw, 50px); 
+            font-weight: bold; 
+            color: #000; 
+            z-index: 10; 
+        }
+        .popup-card { 
+    position: absolute; 
+    padding: var(--popup-padding); 
+    border-radius: 10px; 
+    font-family: "微软雅黑", sans-serif; 
+    font-size: var(--popup-font-size); 
+    color: #fff; 
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2); 
+    animation: popIn 0.4s ease-out forwards; 
+    z-index: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    min-width: var(--popup-min-width);
+    box-sizing: border-box; background-color: var(--rainbow-color);
+    transition: all 0.3s ease;  /* 添加过渡效果 */
+}
+.popup-card:hover {
+    transform: scale(1.2);  /* 悬停放大1.2倍 */
+    z-index: 10;  /* 提高层级 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);  /* 增强阴影 */
+}
+        @keyframes popIn { 
+            0% { transform: scale(0); opacity: 0; } 
+            90% { transform: scale(1.08); } 
+            100% { transform: scale(1); opacity: 1; } 
+        }
+        #bg-music {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="init-text">To 黄婷</div>
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://m.kugou.com/share/song.html?chain=9dLnx2cEvV2" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 文案保留温馨风格
+        const texts = ['我想你', '会好起来的', '没有吃饭', '喜欢你笑的样子哦', '天凉加件衣', '天凉啦，记得加件厚外套', '明天会更好的', '别总盯着手机，多眨眨眼', '忙完记得喝杯温水', '午休别趴着睡，对腰不好', '晚上别熬夜啦', '饭要按时吃，别饿肚子', '多喝水别渴着哦', '别勉强自己啦', '记得多歇歇哦', '好好爱自己', '以后别熬夜早点睡哦', '降温多穿件衣服', '累了就歇会儿吧', '想哭的话就哭会儿吧', '中午别趴桌睡觉', '别总吃凉的东西', '不舒服别硬扛着', '今天风大裹紧衣', '记得涂护手霜哦', '下午记得加个餐', '睡前盖好被子呀', '别总看手机啦', '吃点热乎的暖暖', '忙完好好放松下', '每天都开心', '烦恼都消失', '希望一切顺顺利利的', '万事都胜意', '今天的你也超可爱', '希望所有烦恼都绕开你走', '好运会一直黏着你', '日子慢慢，一切都会好的', '你今天也要开心', '好运常伴你呀', '每天顺顺利利', '天天都有好心情', '万事都能如你意', '希望快乐围绕着你哦', '好运跟着你', '天天都要乐呵呵', '一切都顺顺当当', '别忘多笑笑', '好运天天都找你', '万事都如意', '今天的云像你笑起来的样子', '刚看到好看的花，想拍给你', '今天的奶茶甜度刚好，像你', '晚风很软，想和你一起吹', '以后的路，慢慢走', '有你在的日子都很安心', '想和你一起看好多好多日落', '你在的地方，就是舒服的角落', '能遇见你，就是幸运',  '世界因你而暖', '别太累啦', '不开心的话，就跟我说说呀', '照顾好自己，我会放心点', '别勉强自己，开心最重要', '好好爱自己', '你笑起来超好看', '明天会更好的', '你眼睛真的好看','你在的地方，就是舒服的角落', '你声音软乎乎的', '你连发呆都可爱', '明天会更好', '你性格好招人喜欢的', '你超亮眼的', '你怎么这么好看', '你超戳我心的', '你连说话都可爱', '你真的好耐看哦', '你一笑我就开心', '你超有灵气的呀', '你超可爱哦', '你也太温柔啦', '你这穿搭绝了呀'];
+        
+        // 彩虹7种配色（鲜艳但柔和）
+        const rainbowColors = ['#ff6b6b', '#ff9e7d', '#ffd166', '#8cd9a8', '#70c1b3', '#90a4ae', '#b39ddb'];
+        
+        // 爱心坐标和弹窗数组
+        let heartPoints = [];
+        let popupCards = [];
+        let size = 0;
+        
+        // 计算爱心坐标
+        function calculateHeartPoints() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            size = Math.min(window.innerWidth, window.innerHeight) * 0.04;
+            
+            const points = [];
+            for (let t = 0; t < 2 * Math.PI; t += 0.08) {
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+                points.push({ x: centerX + x * size, y: centerY - y * size });
+            }
+            return points;
+        }
+        
+        // 创建弹窗
+        let colorIndex = 0;
+        function createRainbowCard(x, y, isHeart = false) {
+            const card = document.createElement("div");
+            card.className = "popup-card";
+            card.textContent = texts[Math.floor(Math.random() * texts.length)];
+            card.style.backgroundColor = rainbowColors[colorIndex % rainbowColors.length];
+            colorIndex++;
+            
+            // 定位
+            card.style.left = `${x}px`;
+            card.style.top = `${y}px`;
+            document.body.appendChild(card);
+            
+            // 存储爱心弹窗引用
+            if (isHeart) {
+                popupCards.push(card);
+            }
+            
+            return card;
+        }
+        
+        // 更新爱心弹窗位置
+        function updateHeartLayout() {
+            heartPoints = calculateHeartPoints();
+            
+            // 更新现有爱心弹窗位置
+            popupCards.forEach((card, index) => {
+                if (index < heartPoints.length) {
+                    card.style.left = `${heartPoints[index].x - card.offsetWidth/2}px`;
+                    card.style.top = `${heartPoints[index].y - card.offsetHeight/2}px`;
+                }
+            });
+        }
+        
+        // 初始化背景音乐
+        function initMusic() {
+            const audio = document.getElementById("bg-music");
+            
+            // 尝试自动播放，处理浏览器限制
+            function playAudio() {
+                audio.play().catch(error => {
+                    console.log("自动播放失败，等待用户交互后重试:", error);
+                    // 添加用户交互监听
+                    document.body.addEventListener("click", () => {
+                        audio.play();
+                    }, { once: true });
+                });
+            }
+            
+            // 页面加载完成后尝试播放
+            window.addEventListener("load", playAudio);
+            // 用户点击页面任意位置时播放
+            document.body.addEventListener("click", playAudio, { once: true });
+        }
+        
+        // 初始化
+        (function init() {
+            // 初始化音乐
+            initMusic();
+            
+            // 计算初始爱心坐标
+            heartPoints = calculateHeartPoints();
+            
+            let step = 0;
+            
+            // 1秒后隐藏"黄婷"并生成爱心
+            setTimeout(() => {
+                document.getElementById("init-text").style.display = "none";
+                
+                // 逐一生成爱心轮廓的弹窗
+                const heartTimer = setInterval(() => {
+                    if (step >= heartPoints.length) {
+                        clearInterval(heartTimer);
+                        
+                        // 爱心完成后铺满屏幕
+                        setInterval(() => {
+                            const maxX = window.innerWidth - 80;
+                            const maxY = window.innerHeight - 40;
+                            createRainbowCard(
+                                Math.random() * maxX + 40, 
+                                Math.random() * maxY + 20
+                            );
+                        }, 150);
+                        return;
+                    }
+                    
+                    // 按爱心坐标生成弹窗
+                    createRainbowCard(
+                        heartPoints[step].x - 40, 
+                        heartPoints[step].y - 20, 
+                        true
+                    );
+                    step++;
+                }, 60);
+            }, 1000);
+            
+            // 监听窗口大小变化
+            window.addEventListener("resize", updateHeartLayout);
+        })();
+    </script>
+</body>
+</html>
